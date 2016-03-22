@@ -1,6 +1,7 @@
 # KickIt
 Technologies: Python, Pylot, Bootstrap
-A shoe review community with reviews, ratings and information about the latest shoes. 
+
+*A shoe review community with reviews, ratings and information about the latest shoes.*
 
 Features:
 - Login and Registration with validations
