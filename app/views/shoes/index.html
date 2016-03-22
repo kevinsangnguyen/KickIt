@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <title>KickIt - Shoe Reviews</title>
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <style>
+    body{
+       font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; 
+    }
+
+    .navbar-brand {
+      color:white;
+    }
+
+    </style>
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><u>KickIt</u></a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class='active'><a href="/shoes">Shoe Reviews</a></li>
+          <li><a href="/new_review">Add a Review</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/profile/{{session['id']}}"><span class="glyphicon glyphicon-user"></span>{{session['username']}}</a></li>
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+
+    <div class='container'>
+    <div class='row'>
+      <div class="col-md-7">
+        <h1>Recent Shoe Reviews:</h1>
+        <div class='container' style= "border: solid 2px black; width:550px; height: 600px; overflow-y: scroll;">
+          {% for review in reviews %}
+          <div>
+              <h2 style="padding-left:10px"><a href="/show/{{review['shoe_id']}}"><u>{{review['brand']}} {{ review['name'] }}</u></a></h2>
+              <div style="padding-left:20px">
+              <p>Type: {{review['category']}}</p>
+              <p>Size: {{review['size']}}</p>
+              <p><u>Rating:</u>
+                {% for x in range(0,review['rating']) %}
+                <img src='http://cdn2.hubspot.net/hub/164856/file-2558134859-png/2015/template-assets/splash-page/splash-fire-alarm-safety.png?t=1452623674847&width=40'>
+                {% endfor %}
+              </p>
+              <p><u>Fit:</u> {{review['fit']}}/10 <u>Comfort:</u> {{review['comfort']}}/10 <u>Durability:</u> {{review['durability']}}/10</p>
+              <p><a href="/profile/{{review['user_id']}}"><span class="glyphicon glyphicon-user"></span>{{review['username']}}</a>'s experience:</p>
+              <p>{{review['content']}}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+        <div class='container col-md-4 col-md-offset-1'>
+          <h1>Shoes:</h1>
+          <div style="width: 400px; height: 100px; overflow-y: scroll; border: 2px solid black">
+            {% for shoe in shoes %}
+            <a href="/show/{{shoe['id']}}">{{shoe['brand']}} {{shoe['name']}}</a><br>
+            {% endfor %}
+          </div>
+
+          <br>
+          <br>
+          <br>
+
+          <a href='/new_review'><button type="button" class="btn btn-primary btn-lg"> <span class="glyphicon glyphicon-pencil"></span>  Write a Review</button></a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </body>
+</html>

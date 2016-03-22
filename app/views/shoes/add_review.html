@@ -1,0 +1,134 @@
+<html>
+  <head>
+    <title>KickIt - New Review</title>
+    <link rel="stylesheet" href="/static/css/styles.css" type="text/css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <style>
+    body{
+       font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; 
+    }
+
+    .navbar-brand {
+      color:white;
+    }
+
+    </style>
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#"><u>KickIt</u></a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="/shoes">Shoe Reviews</a></li>
+          <li class='active'><a href="/new_review">Add a Review</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/profile/{{session['id']}}"><span class="glyphicon glyphicon-user"></span>{{session['username']}}</a></li>
+          <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class='container'>
+    	<h1>Add a New Shoe and a Review</h1>
+    	<form action='/shoes/create_review' method='post' class="form-signin">
+	        <p>Shoe: </p>
+	        <div class='form-group row'>
+	        	<label for='shoe_id' class ="col-sm-2 form-control-label">Choose from shoes:</label>
+	        	<select name='shoe_id' style="width:300px;">
+	        		<option value="None"></option>
+	        		{% for shoe in shoes %}
+	        		<option value="{{shoe['id']}}">{{shoe['brand']}} {{shoe['name']}}</option>
+	        		{% endfor %}
+	        	</select>
+	        </div>
+	        	<p>OR Add a new shoe:</p>
+	        	<div class='container'>
+		        	<label for="brand" class ="col-sm-2 form-control-label">Brand:</label>
+		        	<input type='text' name="brand"><br>
+		        	<label for="name" class ="col-sm-2 form-control-label">Shoe Name:</label>
+		        	<input type='text' name='name'><br>
+		        	<label for="category" class ="col-sm-2 form-control-label">Category:</label>
+		        	<input type='text' name='category'><br>
+		        	<label for='pic' class ="col-sm-2 form-control-label">Picture URL:</label>
+		        	<input type='text' name='pic'>
+		        </div>
+		        <br>
+		        <br>
+		        <div class='form-group row'>
+		        <label for='size' class ="col-sm-2 form-control-label">Size:</label>
+		        <select name='size'>
+		        	{% for num in nums %}
+		        	<option value="{{ num }}">{{ num }}</option>
+		        	{% endfor %}
+		        </select>
+		    	</div>
+
+		    	<div class='form-group row'>
+		        <label for='rating' class ="col-sm-2 form-control-label">Rating:</label>
+		        <select name='rating'>
+		        	{% for x in range(0,6) %}
+		        	<option value="{{ x }}">{{ x }}</option>
+		        	{% endfor %}
+		        </select>
+		    	</div>
+
+		    	<div class='form-group row'>
+		        <label for='fit' class ="col-sm-2 form-control-label">Fit:</label>
+		        <select name='fit'>
+		        	{% for x in range(0,11) %}
+		        	<option value="{{ x }}">{{ x }}</option>
+		        	{% endfor %}
+		        </select>
+		    	</div>
+
+		    	<div class='form-group row'>
+		        <label for='comfort' class ="col-sm-2 form-control-label">Comfort:</label>
+		        <select name='comfort'>
+		        	{% for x in range(0,11) %}
+		        	<option value="{{ x }}">{{ x }}</option>
+		        	{% endfor %}
+		        </select>
+		    	</div>
+
+		    	<div class='form-group row'>
+		        <label for='durability' class ="col-sm-2 form-control-label">Durability:</label>
+		        <select name='durability'>
+		        	{% for x in range(0,11) %}
+		        	<option value="{{ x }}">{{x}}</option>
+		        	{% endfor %}
+		        </select>
+		    	</div>
+
+		    	<div class='form-group row'>
+		        <label for='content' class ="col-sm-2 form-control-label">Review(Pros/Cons):</label><br>
+		        <textarea name="content" style="width:767px; height:205px;"></textarea><br>
+				<input type='submit' value='Submit this Review'>
+				</div>
+				</form> 
+
+
+	        </div>
+        </form>
+
+
+
+
+
+  </body>
+</html>
